@@ -10,9 +10,11 @@ services:
                 - PROJECT_PATH=/opt/app/
                 - NODE_ENV=production
                 - YARN=false
+        ports:
+            - "3000:3000"
         volumes:
             - ../app:/opt/app
-        entrypoint: run-nodock "node index.js"
+        entrypoint: run-nodock "npx nodemon -L index.js"
         tty: true
 
     mysql:

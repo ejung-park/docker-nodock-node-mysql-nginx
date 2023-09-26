@@ -29,6 +29,7 @@ RUN echo "source $NVM_DIR/nvm.sh && \
     nvm use default" | bash
 
 
+
 # Add
 RUN groupadd -r www-app &&\
     useradd -r -g www-app www-app
@@ -43,10 +44,15 @@ RUN n "$NODE_VERSION"
 
 RUN if [ ${YARN} = true ]; then \
     npm install -g yarn \
+    npm install -g nodemon \
 ;fi
+
+RUN npm install -g nodemon
 
 COPY scripts/run-nodock.sh /usr/bin/run-nodock
 
 RUN chmod 700 /usr/bin/run-nodock
 
 WORKDIR /opt/app
+
+# CMD [ "nodemon", "-L", "index.js" ]
